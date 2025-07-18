@@ -21,10 +21,10 @@ export const Todos = () => {
 
     }
 
+    const createUser = async () => {
+        const response = await fetch(URL_API, { method: "POST" })
+    }
 
-    useEffect(() => {
-        getTodos()
-    }, [])
 
 
 
@@ -43,35 +43,40 @@ export const Todos = () => {
         setInputValue("")
     }
 
-    const deleteTodo= async (id)=>{
-        const response= await fetch(`https://playground.4geeks.com/todo/todos/${id}`,{
+    const deleteTodo = async (id) => {
+        const response = await fetch(`https://playground.4geeks.com/todo/todos/${id}`, {
             method: "DELETE"
         })
-          getTodos();
-    } 
-
-
-
-    const createUser = async () => {
-        const response = await fetch(URL_API, { method: "POST" })
+        getTodos();
     }
-
+    const deleteUser = async () => {
+        const response = await fetch(URL_API, {
+            method: "DELETE"
+        })
+        setTodoList([])
+        await createUser()
+        await getTodos()
+    }
+    useEffect(() => {
+        getTodos()
+    }, [])
 
     return (
         <>
-            <h2>Todos</h2>
-            <div className="d-flex justify-content-between w-75 mx-auto" >
-             <input className="d-flex justify-content-between w-75 mx-auto" onChange={(e) => setInputValue(e.target.value)}
+            <h2 className="d-flex justify-content-center align-items-center"> Apúntalo aquí para convertirlo en realidad mañana. </h2>
+            <div className="d-flex justify-content-between w-75 mx-auto">
+                <input className="flex-grow-1 me-2 " onChange={(e) => setInputValue(e.target.value)}
                     type="text"
                     value={inputValue}
-                    placeholder="Escribe tu tarea" />
+                    placeholder="Escribe tu futuro." />
                 <button onClick={createTodo}>Agregar</button>
+                <button onClick={deleteUser}>Desde cero</button>
             </div>
             {
                 todoList.map(todos => (
                     <div key={todos.id} className="d-flex justify-content-between w-75 mx-auto">
                         <p>{todos.label}</p>
-                         <span onClick= {()=>deleteTodo(todos.id)}>✖️</span>
+                        <span onClick={() => deleteTodo(todos.id)}>✖️</span>
                     </div>
                 ))
             }

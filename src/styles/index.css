@@ -9,3 +9,19 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+
+body {
+    margin: 0;
+    background-image: url('https://media.giphy.com/media/tJ2sekm3lZsbMX443g/giphy.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+
+    font-family: 'Oswald', Arial, sans-serif;
+    color: white;
+}
+
+;
